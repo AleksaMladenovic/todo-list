@@ -7,5 +7,49 @@
 </head>
 <body>
     
+    <div class="projects">
+        <h1>Projects</h1>
+        <button>Add Project</button>
+        <!-- <div class="Project">
+            <h2>ProjectName</h2>
+            <button>Add Task</button>
+            <div class="Task">
+                <h3>TaskName</h3>
+                <p>Description</p>
+                <p>Due Date</p>
+                <p>Priority</p>
+                <button>Change</button>
+            </div>
+        </div> -->
+        <dialog id="addProjectDialog">
+            <form>
+                <h2>Project:</h2>
+                <label for="projectName">Name:</label>
+                <input type="text" name="projectName" id="projectName" required>
+                <button type="button" class="add">Add project</button>
+                <button type="button" class="cancel">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="addTaskDialog">
+            <form>
+                <h2>Task:</h2>
+                <label for="taskTitle">Title:</label>
+                <input type="text" name="taskTitle" id="taskTitle" required>
+                <label for="taskDescription">Description</label>
+                <textarea name="taskDescription" id="taskDescription"> </textarea> 
+                <label for="taskDueDate">Due Date</label>
+                <input type="datetime-local" id="taskDueDate" name="taskDueDate"> 
+                <label for="taskPriority">Task priority:</label>
+                <input type="radio" id="highPriority" name="priority" value="High">
+                <label for="highPriority">High</label>
+                <input type="radio" id="normalPriority" name="priority" value="Normal">
+                <label for="normalPriority">Normal</label>
+                <input type="radio" id="lowPriority" name="priority" value="Low">
+                <label for="lowPriority">Low</label>
+                <button type="button" class="add">Add Task</button>
+                <button type="button" class="cancel">Cancel</button>
+            </form>
+        </dialog>
+    </div>
 </body>
 </html>
