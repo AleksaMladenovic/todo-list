@@ -1,29 +1,59 @@
+import { events } from "./pubSub";
+import { compareTasksByDueDate, compareTasksByPriority } from "./task";
+
 export const Project = (title)=>{
-    const obj = {
+    const project = {
         title,
         tasks: [],
+        sortType: "priority",
+        addTask,
+        removeTask,
+        log,
+        setSortType,
+        sortTasks,
+        compareFunction: compareTasksByPriority,
     };
 
-    const addTask = (task)=>{
-        obj.tasks.push(task);
+    function addTask(task){
+        project.tasks.push(task);
+        sortTasks();
+        events.emit("AddTask",task,project);
     }
 
-    const removeTask = (task) =>{
-        obj.tasks = obj.tasks.filter((item) => item!==task);
+    function removeTask(task){
+        project.tasks = project.tasks.filter((item) => item!==task);
     }
 
-    const log = () =>{
-        console.log("This is inside Project:" + obj.title);
-        obj.tasks.forEach((task)=>task.log());
+    function log (){
+        console.log("This is inside Project:" + project.title);
+        project.tasks.forEach((task)=>task.log());
         console.log("");
     }
-    return Object.assign(obj,{addTask,removeTask,log});
+
+    function sortTasks(){
+        project.tasks.sort(project.compareFunction);
+        events.emit("SortTask");
+    }
+
+    function setSortType(sortType){
+        switch(sortType){
+            case "priority":
+                project.compareFunction = compareTasksByPriority;
+                break;
+            case "dueDate":
+                project.compareFunction = compareTasksByDueDate;
+        }
+        project.sortType = sortType; 
+        project.sortTasks();
+    }
+    return project;
 }
 
-export let projects = {
+export const projects = {
     list : [],
     addProject(project){
         this.list.push(project);
+        events.emit("AddProject",project);
     },
     removeProject(project){
         this.list = this.list.filter((item)=>item!==project);

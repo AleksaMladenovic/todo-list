@@ -1,10 +1,10 @@
 import { Project } from "./project.js";
-import { addProject, addTask, removeProject, removeTask } from "./index.js";
 import { Task } from "./task.js";
 import { ProjectDiv } from "./projectDiv.js";
 import { TaskDiv } from "./taskDiv.js";
+import { projects } from "./project.js";
 
-const addProjectBtn = document.querySelector("div.projects>button");
+let addProjectBtn = document.querySelector("button.btnAddProject");
 const addProjectDialog = document.querySelector("#addProjectDialog");
 const projectDialogBtnAdd = document.querySelector(
   "#addProjectDialog button.add"
@@ -18,6 +18,15 @@ const taskDialogBtnCancel = document.querySelector(
   "#addTaskDialog button.cancel"
 );
 
+export function initialSettings() {
+  addProjectBtn = document.querySelector("button.btnAddProject");
+  
+  addProjectBtn.addEventListener("click", async () => {
+    const newProject = await getProject();
+    if (newProject !== null) projects.addProject(newProject);
+  });
+}
+
 function waitForClick(buttons) {
   return new Promise((resolve) => {
     buttons.forEach((button) => {
@@ -28,10 +37,7 @@ function waitForClick(buttons) {
   });
 }
 
-addProjectBtn.addEventListener("click", async () => {
-  const newProject = await getProject();
-  if (newProject !== null) addProject(newProject);
-});
+
 
 async function getProject() {
   addProjectDialog.showModal();
@@ -55,23 +61,27 @@ function clearProjectDialog() {
   document.querySelector("#projectName").value = "";
 }
 
-export function createProject(project) {
+export function createProjectDom(project) {
   const projectDom = ProjectDiv(project);
-  document.querySelector("div.projects").appendChild(projectDom.div);
 
   projectDom.btnAddTask.addEventListener("click", async () => {
     const newTask = await getTask();
-    if (newTask !== null) addTask(newTask, project, projectDom);
+    if (newTask !== null) project.addTask(newTask);
   });
 
   projectDom.btnRemove.addEventListener("click", () => {
-    removeProject(project);
-    document.querySelector("div.projects").removeChild(projectDom.div);
+    projects.removeProject(project);
+    projectDom.div.remove();
   });
 
   projectDom.btnChange.addEventListener("click", async () => {
     await changeProject(project, projectDom);
   });
+
+  projectDom.selectSort.addEventListener("change", ()=>{
+    project.setSortType(projectDom.selectSort.value);
+  })
+
   return projectDom;
 }
 
@@ -113,19 +123,23 @@ function clearTaskDialog() {
     document.querySelector(`input[name="priority"]:checked`).checked = false;
 }
 
-export function createTask(task, project, projectDom) {
+export function createTaskDom(task, project) {
   const taskDom = TaskDiv(task);
-
-  projectDom.div.appendChild(taskDom.div);
 
   taskDom.btnChange.addEventListener("click", async () => {
     await changeTask(task, taskDom);
   });
 
-  taskDom.btnRemove.addEventListener("click",async () => {
-    removeTask(task, project);
-    projectDom.div.removeChild(taskDom.div);
+  taskDom.btnRemove.addEventListener("click", async () => {
+    project.remove(task);
+    taskDom.div.remove();
   });
+
+  taskDom.doneCheckbox.addEventListener("change",()=>{
+    task.done = true;
+  })
+
+  return taskDom;
 }
 
 async function changeTask(task, taskDom) {

@@ -49,3 +49,16 @@ h6 {
   isolation: isolate;
 }
 
+ /* Homepage:
+Projects i dugme ce biti flexovani sa strane
+Add project ce biti promenjen u New Project
+
+Svaki projekat bi trebao da bude uokviren
+Naslov projekta ce biti u sredini i desno ce biti tri dugmeta koji ce u stvari biti +, Kanta, i nesto za edit
+Dodati sort u okviru svakog projekta, moci ce se sortirati po prioritetu i po vremenu
+
+Svaki task ce imati drugaciju boju u zavisnosti od prioriteta
+Naslov ce biti centralno postavljen, skroz desno dva dugmeta
+levo od naslova treba da bude checkbox za stikliranje da li je izvrsen task ili ne
+Ispod njega datum, klikom na datum treba da se prikaze za koliko istice vreme Task-a / da se togluje
+ */
