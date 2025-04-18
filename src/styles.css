@@ -62,3 +62,39 @@ Naslov ce biti centralno postavljen, skroz desno dva dugmeta
 levo od naslova treba da bude checkbox za stikliranje da li je izvrsen task ili ne
 Ispod njega datum, klikom na datum treba da se prikaze za koliko istice vreme Task-a / da se togluje
  */
+div.content{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+div.Projects.Homepage{
+  width: min(800px,100%);
+  padding: 0 20px;
+  div.title{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  div.Project{
+    border: 1px solid black;
+    margin: 10px 20px 0px 20px;
+    h2{
+      text-align: center;
+    }
+    >div.buttons{
+      display: flex;
+      justify-content: center;
+      button{
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+      }
+      svg{
+        height: 30px;
+        
+      }
+    }
+  }
+}

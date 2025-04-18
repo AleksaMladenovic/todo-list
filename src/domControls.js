@@ -3,6 +3,7 @@ import { Task } from "./task.js";
 import { ProjectDiv } from "./projectDiv.js";
 import { TaskDiv } from "./taskDiv.js";
 import { projects } from "./project.js";
+import { events } from "./pubSub.js";
 
 let addProjectBtn = document.querySelector("button.btnAddProject");
 const addProjectDialog = document.querySelector("#addProjectDialog");
@@ -63,6 +64,11 @@ function clearProjectDialog() {
 
 export function createProjectDom(project) {
   const projectDom = ProjectDiv(project);
+
+  projectDom.btnExpand.addEventListener("click", ()=>{
+    projectDom.expanded = !projectDom.expanded;
+    events.emit("expandedChange",{projectDom});
+  })
 
   projectDom.btnAddTask.addEventListener("click", async () => {
     const newTask = await getTask();

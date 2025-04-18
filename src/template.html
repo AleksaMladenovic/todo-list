@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-    <div class="projects">
-        <div class="content">
-        </div>
-        <!-- <div class="Project">
+  </head>
+  <body>
+    <div class="content"></div>
+    <!-- <div class="Project">
             <h2>ProjectName</h2>
             <button>Add Task</button>
             <div class="Task">
@@ -21,35 +18,41 @@
                 <button>Change</button>
             </div>
         </div> -->
+        
         <dialog id="addProjectDialog">
-            <form>
-                <h2>Project:</h2>
-                <label for="projectName">Name:</label>
-                <input type="text" name="projectName" id="projectName" required>
-                <button type="button" class="add">Add project</button>
-                <button type="button" class="cancel">Cancel</button>
-            </form>
-        </dialog>
-        <dialog id="addTaskDialog">
-            <form>
-                <h2>Task:</h2>
-                <label for="taskTitle">Title:</label>
-                <input type="text" name="taskTitle" id="taskTitle" required>
-                <label for="taskDescription">Description</label>
-                <textarea name="taskDescription" id="taskDescription"> </textarea> 
-                <label for="taskDueDate">Due Date</label>
-                <input type="datetime-local" id="taskDueDate" name="taskDueDate"> 
-                <label for="taskPriority">Task priority:</label>
-                <input type="radio" id="highPriority" name="priority" value="High">
-                <label for="highPriority">High</label>
-                <input type="radio" id="normalPriority" name="priority" value="Normal" checked>
-                <label for="normalPriority">Normal</label>
-                <input type="radio" id="lowPriority" name="priority" value="Low">
-                <label for="lowPriority">Low</label>
-                <button type="button" class="add">Add Task</button>
-                <button type="button" class="cancel">Cancel</button>
-            </form>
-        </dialog>
-    </div>
-</body>
+      <form>
+        <h2>Project:</h2>
+        <label for="projectName">Name:</label>
+        <input type="text" name="projectName" id="projectName" required />
+        <button type="button" class="add">Add project</button>
+        <button type="button" class="cancel">Cancel</button>
+      </form>
+    </dialog>
+    <dialog id="addTaskDialog">
+      <form>
+        <h2>Task:</h2>
+        <label for="taskTitle">Title:</label>
+        <input type="text" name="taskTitle" id="taskTitle" required />
+        <label for="taskDescription">Description</label>
+        <textarea name="taskDescription" id="taskDescription"> </textarea>
+        <label for="taskDueDate">Due Date</label>
+        <input type="datetime-local" id="taskDueDate" name="taskDueDate" />
+        <label for="taskPriority">Task priority:</label>
+        <input type="radio" id="highPriority" name="priority" value="High" />
+        <label for="highPriority">High</label>
+        <input
+          type="radio"
+          id="normalPriority"
+          name="priority"
+          value="Normal"
+          checked
+        />
+        <label for="normalPriority">Normal</label>
+        <input type="radio" id="lowPriority" name="priority" value="Low" />
+        <label for="lowPriority">Low</label>
+        <button type="button" class="add">Add Task</button>
+        <button type="button" class="cancel">Cancel</button>
+      </form>
+    </dialog>
+  </body>
 </html>
