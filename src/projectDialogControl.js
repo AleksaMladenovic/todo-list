@@ -8,6 +8,7 @@ const projectDialogBtnAdd = document.querySelector(
 const projectDialogBtnCancel = document.querySelector(
   "#addProjectDialog button.cancel"
 );
+const form = document.querySelector("#addProjectForm");
 
 export async function getProject() {
   addProjectDialog.showModal();
@@ -39,3 +40,14 @@ export async function changeProject(project) {
   document.querySelector("button.add").textContent = "Add";
   return newProject;
 }
+
+form.addEventListener("input", checkFormValidity);
+
+function checkFormValidity(){
+  if(form.checkValidity()){
+    projectDialogBtnAdd.disabled = false;
+  }else{
+    projectDialogBtnAdd.disabled = true;
+  }
+}
+checkFormValidity();
