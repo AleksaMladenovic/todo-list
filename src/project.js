@@ -1,67 +1,59 @@
+import { returnCompareFunction } from "./task";
 import { events } from "./pubSub";
-import { compareTasksByDueDate, compareTasksByPriority } from "./task";
-
-export const Project = (title)=>{
+export const Project = (title) =>{
     const project = {
         title,
-        tasks: [],
-        sortType: "priority",
-        addTask,
+        tasks: [], 
+        orderedTasks: [],
+        addTask, 
         removeTask,
-        log,
-        setSortType,
+        copyProject,
         sortTasks,
-        compareFunction: compareTasksByPriority,
     };
+
+    let sortFunction = returnCompareFunction("default");
 
     function addTask(task){
         project.tasks.push(task);
-        sortTasks();
-        events.emit("AddTask",task,project);
+        project.orderedTasks.push(task);
+        project.orderedTasks.sort(sortFunction);
+        events.emit("listChange");
     }
 
     function removeTask(task){
-        project.tasks = project.tasks.filter((item) => item!==task);
+        project.tasks.splice(project.tasks.findIndex(item => item ===task ),1);
+        project.orderedTasks.splice(project.orderedTasks.findIndex(item => item ===task ),1);
+        events.emit("listChange");
     }
 
-    function log (){
-        console.log("This is inside Project:" + project.title);
-        project.tasks.forEach((task)=>task.log());
-        console.log("");
+    function copyProject(newProject){
+        project.title = newProject.title;
     }
 
-    function sortTasks(){
-        project.tasks.sort(project.compareFunction);
-        events.emit("SortTask");
+    function sortTasks(sortType){
+        if(sortType)
+            setSortType(sortType);
+        project.orderedTasks.sort(sortFunction);
     }
 
     function setSortType(sortType){
-        switch(sortType){
-            case "priority":
-                project.compareFunction = compareTasksByPriority;
-                break;
-            case "dueDate":
-                project.compareFunction = compareTasksByDueDate;
-        }
-        project.sortType = sortType; 
-        project.sortTasks();
+        if(sortType==="default")
+            project.orderedTasks = project.tasks;
+        sortFunction = returnCompareFunction(sortType);
     }
+
     return project;
 }
 
-export const projects = {
-    list : [],
-    addProject(project){
+export let listOfProjects = {
+    list:[],
+    addProject: function(project){
         this.list.push(project);
-        events.emit("AddProject",project);
+        events.emit("listChange");
     },
-    removeProject(project){
-        this.list = this.list.filter((item)=>item!==project);
-    },
-    log(){
-        console.log("Projects:");
-        this.list.forEach(project => {
-            project.log();
-        });
+    removeProject: function(project){
+        this.list.splice(this.list.findIndex(item=>item===project),1);
+        events.emit("listChange");
     }
-}
+};
+

@@ -49,7 +49,7 @@ h6 {
   isolation: isolate;
 }
 
- /* Homepage:
+/* Homepage:
 Projects i dugme ce biti flexovani sa strane
 Add project ce biti promenjen u New Project
 
@@ -62,39 +62,177 @@ Naslov ce biti centralno postavljen, skroz desno dva dugmeta
 levo od naslova treba da bude checkbox za stikliranje da li je izvrsen task ili ne
 Ispod njega datum, klikom na datum treba da se prikaze za koliko istice vreme Task-a / da se togluje
  */
-div.content{
-  width: 100vw;
-  display: flex;
-  justify-content: center;
+svg {
+  height: 30px;
+  width: 30px;
 }
-div.Projects.Homepage{
-  width: min(800px,100%);
-  padding: 0 20px;
-  div.title{
+
+div.content{
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+div.content.homepage {
+  padding: 0px 10px;
+
+  .newProjectBtn{
+    background-color: transparent;
+    border-radius: 4px;
+    font-weight:500;
+  }
+  .newProjectBtn:hover{
+    background-color: rgb(241, 241, 241);
+  }
+  .title {
     display: flex;
     justify-content: space-between;
+  }
+
+  button.newProjectBtn {
+    height: 30px;
+    align-self: center;
+  }
+  button.svgBtn {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+  }
+
+  .project {
+    border: 2px solid black;
+    padding: 0px 10px 0px 10px;
+    border-radius: 14px;
+    .projectTitle {
+      display: flex;
+      justify-content: space-between;
+    }
+    margin-bottom: 20px;
+  }
+
+  .buttons {
+    border: 1px solid black;
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 10px;
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    button {
+      position: relative;
+    }
+    button:hover::after {
+      position: absolute;
+      width: 300px;
+      text-align: left;
+      margin-left: -20px;
+    }
+    .addTaskBtn:hover::after {
+      content: "Add task";
+    }
+    .changeBtn:hover::after {
+      content: "Change project";
+    }
+    .removeBtn:hover::after {
+      content: "Remove project";
+    }
+  }
+
+  .settings {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+  select {
+    border-radius: 10px;
+    background-color: white;
+  }
+  .settings {
+    margin-bottom: 18px;
+  }
+
+  div.task{
+    border:2px solid black;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding: 10px;
+
+    .changeBtn:hover::after {
+      content: "Change task";
+    }
+    .deleteBtn:hover::after {
+      content: "Delete task";
+    }
+    .buttons{
+      margin-bottom: 10px;
+    }
+    .dueDate{
+      cursor: pointer;
+    }
+    .status{
+      display: flex;
+      gap: 10px;
+    }
+    input[type="checkbox"]{
+      height: 20px;
+      width: 20px;
+      align-self: center;
+    }
+  }
+
+  div.task.HighPriority{
+    border-color: red;
+  }
+  div.task.LowPriority{
+    border-color: green;
+  }
+  div.task.NormalPriority{
+    border-color: blue;
+  }
+}
+
+dialog{
+  position: fixed;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  h2{
+    text-align: center;
+  }
+
+  .controls{
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+    gap: 6px;
+  }
+
+  .input label:not([for*="Priority"]){
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+  }
+
+  .input{
+  }
+
+  textarea{
+    width: 208px;
+    height: 100px;
     margin-top: 10px;
   }
 
-  div.Project{
-    border: 1px solid black;
-    margin: 10px 20px 0px 20px;
-    h2{
-      text-align: center;
-    }
-    >div.buttons{
-      display: flex;
-      justify-content: center;
-      button{
-        margin: 0;
-        padding: 0;
-        background-color: transparent;
-        border: none;
-      }
-      svg{
-        height: 30px;
-        
-      }
-    }
+  .input.description label{
+    position: relative;
+    bottom: 82px;
   }
+}
+
+button{
+  cursor: pointer;
 }

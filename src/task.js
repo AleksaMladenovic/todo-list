@@ -1,38 +1,44 @@
-import {compareAsc, compareDesc,format} from "date-fns";
+import { compareAsc } from "date-fns";
+import { events } from "./pubSub";
 
-export const Task = (title, description, dueDate, priority) => {
-  const task = { title, description, dueDate, priority,done:false, log, change };
-  function log() {
-    console.log(`This taks: ${task.title}`);
-    console.log(`Description: ${task.description}`);
-    console.log(`Due Date: ${task.dueDate}`);
-    console.log(`Priority: ${task.priority}`);
+export const Task = (title, description, dueDate, priority, project) => {
+  const task = {
+    title,
+    description,
+    dueDate,
+    priority,
+    done: false,
+    project,
+    copyTask,
+    togleDone,
+  };
+
+  function copyTask(newTask) {
+    task.title = newTask.title;
+    task.description = newTask.description;
+    task.dueDate = newTask.dueDate;
+    task.priority = newTask.priority;
+    task.done = newTask.done;
   }
 
-  function change(_title, _description, _dueDate, _priority) {
-    task.title = _title;
-    task.description = _description;
-    task.dueDate = _dueDate;
-    task.priority = _priority;
+  function togleDone(){
+    task.done = !task.done;
+    events.emit("listChange");
   }
-
   return task;
 };
 
-export function compareTasksByPriority(task1, task2){
-    let priorityList = {};
-    priorityList["High"] = 3;
-    priorityList["Normal"]=2;
-    priorityList["Low"]=1;
-    if(priorityList[task1.priority]>priorityList[task2.priority])
-        return -1;
-    if(priorityList[task1.priority]>priorityList[task2.priority])
-        return 1;
-    return 0;
-}
+export function returnCompareFunction(sortBy){
+    const priorityValues = {High:3,Normal:2,Low:1}
 
-export function compareTasksByDueDate(task1,task2){
-    const task1Date = new Date(task1.dueDate);
-    const task2Date = new Date(task2.dueDate);
-    return compareAsc(task1Date,task2Date);
-}
+    if(sortBy==="default")
+        return function(a,b){ return 0};
+    if(sortBy==="dueDate")
+        return function(a,b){
+            return compareAsc(a.dueDate,b.dueDate);
+        }
+    if(sortBy==="priority")
+        return function(a,b){
+            return priorityValues[b.priority]-priorityValues[a.priority];
+        }
+  }
