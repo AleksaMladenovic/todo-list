@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="content">
+      <!-- <div class="project">
+        <div class="title">
+          <h2>Project1</h2>
+          <button class="svgBtn expand">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M18 9L12 15L6 9" stroke="#33363F" stroke-width="2"></path> </g></svg>
+          </button>
+        </div>
+        <div class="settings">
+          <div class="buttons">
+            <button class="addTaskBtn svgBtn">
+              <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#000000" fill-rule="evenodd" d="M9 17a1 1 0 102 0v-6h6a1 1 0 100-2h-6V3a1 1 0 10-2 0v6H3a1 1 0 000 2h6v6z"></path> </g></svg>
+            </button>
+            <button class="changeBtn svgBtn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M20.8477 1.87868C19.6761 0.707109 17.7766 0.707105 16.605 1.87868L2.44744 16.0363C2.02864 16.4551 1.74317 16.9885 1.62702 17.5692L1.03995 20.5046C0.760062 21.904 1.9939 23.1379 3.39334 22.858L6.32868 22.2709C6.90945 22.1548 7.44285 21.8693 7.86165 21.4505L22.0192 7.29289C23.1908 6.12132 23.1908 4.22183 22.0192 3.05025L20.8477 1.87868ZM18.0192 3.29289C18.4098 2.90237 19.0429 2.90237 19.4335 3.29289L20.605 4.46447C20.9956 4.85499 20.9956 5.48815 20.605 5.87868L17.9334 8.55027L15.3477 5.96448L18.0192 3.29289ZM13.9334 7.3787L3.86165 17.4505C3.72205 17.5901 3.6269 17.7679 3.58818 17.9615L3.00111 20.8968L5.93645 20.3097C6.13004 20.271 6.30784 20.1759 6.44744 20.0363L16.5192 9.96448L13.9334 7.3787Z" fill="#0F0F0F"></path> </g></svg>
+            </button>
+            <button class="removeBtn svgBtn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </button>
+          </div>
+          <select name="sortType" id="sortType">
+            <option value="default">Default</option>
+            <option value="dueDate">Due Date</option>
+            <option value="priority">Priority</option>
+          </select>
+        </div>
+        <div class="tasks"></div>
+      </div> -->
+    </div>
+    <!-- <div class="Project">
+            <h2>ProjectName</h2>
+            <button>Add Task</button>
+            <div class="Task">
+                <h3>TaskName</h3>
+                <p>Description</p>
+                <p>Due Date</p>
+                <p>Priority</p>
+                <button>Change</button>
+            </div>
+        </div> -->
+    <template id="homepage-template">
+      <div class="title">
+        <h1>Projects</h1>
+        <button class="newProjectBtn">New Project</button>
+      </div>
+    </template>
+    <template id="task-template-homepage">
+      <div class="task">
+        <div class="title">
+          <div class="status">
+            <input type="checkbox" name="doneCheck"></input>
+            <h3></h3>
+          </div>
+          <p class="dueDate"></p>
+        </div>
+        <div class="buttons">
+          <button class="changeBtn svgBtn"></button>
+          <button class="deleteBtn svgBtn"></button>
+        </div>
+        <p class="description"></p>
+      </div>
+    </template>
+    <template id="project-template-homepage">
+      <div class="project">
+        <div class="title">
+          <h2></h2>
+          <button class="svgBtn expand"></button>
+        </div>
+        <div class="settings">
+          <div class="buttons">
+            <button class="addTaskBtn svgBtn"></button>
+            <button class="changeBtn svgBtn"></button>
+            <button class="removeBtn svgBtn"></button>
+          </div>
+          <select name="sortType" id="sortType">
+            <option value="default">Default</option>
+            <option value="dueDate">Due Date</option>
+            <option value="priority">Priority</option>
+          </select>
+        </div>
+        <div class="tasks"></div>
+      </div>
+    </template>
+    <dialog id="addProjectDialog">
+      <form>
+        <h2>Project</h2>
+        <label for="projectName">Name:</label>
+        <input type="text" name="projectName" id="projectName" required />
+        <div class="controls">
+          <button type="button" class="add">Add project</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="addTaskDialog">
+      <form id="addTaskForm">
+        <h2>Task</h2>
+        <div class="input">
+          <label for="taskTitle">Title:</label>
+          <input type="text" name="taskTitle" id="taskTitle" required />
+        </div>
+
+        <div class="input description">
+          <label for="taskDescription">Description:</label>
+          <textarea name="taskDescription" id="taskDescription"> </textarea>
+        </div>
+        <div class="input">
+          <label for="taskDueDate">Due Date:</label>
+          <input type="datetime-local" id="taskDueDate" name="taskDueDate" />
+        </div>
+        <div class="input">
+          <label for="taskpriority">Task priority:</label>
+          <input type="radio" id="highPriority" name="priority" value="High" />
+          <label for="highPriority">High</label>
+          <input
+            type="radio"
+            id="normalPriority"
+            name="priority"
+            value="Normal"
+            checked
+          />
+          <label for="normalPriority">Normal</label>
+          <input type="radio" id="lowPriority" name="priority" value="Low" />
+          <label for="lowPriority">Low</label>
+        </div>
+        <div class="controls">
+          <button type="button" class="add">Add Task</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
